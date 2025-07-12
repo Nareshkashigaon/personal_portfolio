@@ -3,32 +3,32 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "SaaS Landing Page",
-    description: "A beautiful landing page app using React and Tailwind.",
+    title: "Streamify",
+    description: "Real-time video streaming platform with user authentication and live chat.",
     image: "/projects/project1.png",
-    tags: ["React", "TailwindCSS", "Supabase"],
-    demoUrl: "#",
-    githubUrl: "#",
+    tags: ["Mern stack", "TailwindCSS", "getStream.io","Rest API"],
+    demoUrl: "https://streamify-video-call-chat-app.onrender.com",
+    githubUrl: "https://github.com/Nareshkashigaon/streamify-video-call-chat-app",
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
+    title: "Iot based alerting surveillance system for smart cities",
     description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
+      "An IoT-based alerting surveillance system designed to enhance security in smart cities by real-time data visualization and monitoring.",
     image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
-    demoUrl: "#",
-    githubUrl: "#",
+    tags: ["Mern stack", "Embedded C", "Arduino", "TailwindCSS","Rest API"],
+    demoUrl: "https://drive.google.com/file/d/1TeovoHOgvu3CjaHDJKby2bi2kzjmx1F2/view",
+    githubUrl: "https://github.com/Nareshkashigaon/Iot-based-alterting-system-for-smart-cities",
   },
   {
     id: 3,
-    title: "E-commerce Platform",
+    title: "Todo List App",
     description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
+      "A simple and intuitive To-Do List Web App that helps users manage their daily tasks efficiently. Users can add, edit, delete, and mark tasks as complete",
     image: "/projects/project3.png",
-    tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "#",
-    githubUrl: "#",
+    tags: ["React"],
+    demoUrl: "https://todonaresh.netlify.app/",
+    githubUrl: "https://github.com/Nareshkashigaon/todo_app?tab=readme-ov-file",
   },
 ];
 
@@ -50,7 +50,7 @@ export const ProjectsSection = () => {
           {projects.map((project, key) => (
             <div
               key={key}
-              className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+              className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover relative"
             >
               <div className="h-48 overflow-hidden">
                 <img
@@ -62,8 +62,8 @@ export const ProjectsSection = () => {
 
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
+                  {project.tags.map((tag,index) => (
+                    <span key={index} className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
                       {tag}
                     </span>
                   ))}
@@ -74,11 +74,12 @@ export const ProjectsSection = () => {
                   {project.description}
                 </p>
                 <div className="flex justify-between items-center">
-                  <div className="flex space-x-3">
+                  <div className="flex space-x-3 absolute left-5 bottom-5">
                     <a
                       href={project.demoUrl}
                       target="_blank"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
+
                     >
                       <ExternalLink size={20} />
                     </a>
@@ -100,7 +101,7 @@ export const ProjectsSection = () => {
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
             target="_blank"
-            href="https://github.com/machadop1407"
+            href="https://github.com/Nareshkashigaon"
           >
             Check My Github <ArrowRight size={16} />
           </a>

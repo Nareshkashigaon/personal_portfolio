@@ -8,11 +8,11 @@ export const ThemeToggle = () => {
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
-      setIsDarkMode(true);
+      setIsDarkMode(false);
       document.documentElement.classList.add("dark");
     } else {
       localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
+      setIsDarkMode(true);
     }
   }, []);
 

@@ -8,26 +8,75 @@ import {
   Twitch,
   Twitter,
 } from "lucide-react";
+
+import emailjs from "@emailjs/browser";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 export const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+  const USER_ID = import.meta.env.VITE_USER_ID;
+
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      });
-      setIsSubmitting(false);
-    }, 1500);
+    const data = {
+      //get these values from registered emailjs account
+      service_id: SERVICE_ID,
+      template_id: TEMPLATE_ID,
+      user_id: USER_ID,
+      templateParams: {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      },
+    };
+
+    try {
+      const response =await emailjs.send(
+        data.service_id,
+        data.template_id,
+        data.templateParams,
+        data.user_id
+      );
+      console.log("SUCCESS!", response.status, response.text);
+      if(response.status===200){
+      setTimeout(() => {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+          duration: 3000,
+        });
+        setIsSubmitting(false);
+      }, 1500);
+    }
+
+      setTimeout(() => {
+        setFormData({ name: "", email: "", message: "" });
+      }, 1000);
+    } catch (error) {
+      console.log("FAILED...", error);
+      setTimeout(() => {
+        toast({
+          title: "Message not sent!",
+          description: "somthing went wrong. Please try again later.",
+          duration: 3000,
+        });
+        setIsSubmitting(false);
+      }, 1500);
+    }
   };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -59,7 +108,7 @@ export const ContactSection = () => {
                     href="mailto:hello@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    hello@gmail.com
+                    nareshkashigaon@gmail.com.com
                   </a>
                 </div>
               </div>
@@ -70,10 +119,10 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-medium"> Phone</h4>
                   <a
-                    href="tel:+11234567890"
+                    href="tel:+916363573550"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    +1 (123) 456-7890
+                    +916363573550
                   </a>
                 </div>
               </div>
@@ -84,7 +133,7 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-medium"> Location</h4>
                   <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Vancouver, BC, Canada
+                    Yadgir , Karnataka, India
                   </a>
                 </div>
               </div>
@@ -93,17 +142,39 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="#" target="_blank">
+                <a
+                  href="https://linkedin.com/in/naresh-kashigaon-247315224"
+                  target="_blank"
+                >
                   <Linkedin />
                 </a>
-                <a href="#" target="_blank">
-                  <Twitter />
-                </a>
-                <a href="#" target="_blank">
+
+                <a
+                  href="https://www.instagram.com/naresh_kashigaon_11_11/"
+                  target="_blank"
+                >
                   <Instagram />
                 </a>
-                <a href="#" target="_blank">
-                  <Twitch />
+                <a
+                  href="https://leetcode.com/u/Naresh_kashigaon-1/"
+                  target="_blank"
+                >
+                  <img
+                    width="24"
+                    height="24"
+                    src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-level-up-your-coding-skills-and-quickly-land-a-job-logo-color-tal-revivo.png"
+                    alt="external-level-up-your-coding-skills-and-quickly-land-a-job-logo-color-tal-revivo"
+                  />
+                </a>
+
+                <a href="https://github.com/Nareshkashigaon" target="_blank">
+                  <img
+                    style={{ backgroundColor: "white" }}
+                    width="30"
+                    height="30"
+                    src="https://img.icons8.com/ios-glyphs/30/github.png"
+                    alt="github"
+                  />
                 </a>
               </div>
             </div>
@@ -130,7 +201,11 @@ export const ContactSection = () => {
                   name="name"
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Pedro Machado..."
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                 />
               </div>
 
@@ -148,7 +223,11 @@ export const ContactSection = () => {
                   name="email"
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="john@gmail.com"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                 />
               </div>
 
@@ -166,6 +245,10 @@ export const ContactSection = () => {
                   required
                   className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                 />
               </div>
 
