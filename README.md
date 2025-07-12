@@ -1,10 +1,7 @@
 # Build a Modern Portfolio Website with React & TailwindCSS
 
 <div align="center">
-  <br />
-  
-    <img src="./banner.png" alt="Portfolio Website Banner">
-  
+ 
   <br />
   <div>
     <img src="https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
