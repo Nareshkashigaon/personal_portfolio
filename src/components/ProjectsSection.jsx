@@ -22,10 +22,20 @@ const projects = [
   },
   {
     id: 3,
+    title: "Full Stack Ai Saas Application",
+    description:
+      "An IoT-based alerting surveillance system designed to enhance security in smart cities by real-time data visualization and monitoring.",
+    image: "/projects/project3.png",
+    tags: ["Pern stack", "Clerk Auth", "Neon serverless DB","Cloudinary", "TailwindCSS","Rest API"],
+    demoUrl: "https://quick-ai-silk.vercel.app/",
+    githubUrl: "https://github.com/Nareshkashigaon/Full-stack-Ai-Saas-Application-",
+  },
+  {
+    id: 4,
     title: "Todo List App",
     description:
       "A simple and intuitive To-Do List Web App that helps users manage their daily tasks efficiently. Users can add, edit, delete, and mark tasks as complete",
-    image: "/projects/project3.png",
+    image: "/projects/project4.png",
     tags: ["React"],
     demoUrl: "https://todonaresh.netlify.app/",
     githubUrl: "https://github.com/Nareshkashigaon/todo_app?tab=readme-ov-file",
